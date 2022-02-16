@@ -27,11 +27,20 @@ const objetivoGeolocalizador = new ol.Geolocation(
         projection: objetoView.getProjection(),
     }
 );
+/*const objetivoGeolocalizador= new ol.Geolocation(
+    {
+        trackingOptions: 
+        {
+            enableHighAccuracy: true,
+        },
+        projection: objetoView.getProjection(),
+    }
+)*/
 $(document).ready ( function()
 {
     checkChismoso = document.getElementById("checkUbicacion");
     $( "#checkUbicacion").prop("checked", false);
-    checkChismoso?.addEventListener("change", function()
+    checkChismoso.addEventListener("change", function()
     {
         objetivoGeolocalizador.setTracking(this.checked);
     }
@@ -64,6 +73,7 @@ objetivoGeolocalizador.on('change:accuracyGeometry', function()
 );
 const positionFeature = new ol.Feature();
 positionFeature.setStyle(
+    new ol.style.Style(
                         {
                             imagen: new ol.style.Circle(
                                 {
@@ -73,7 +83,7 @@ positionFeature.setStyle(
                                             color: '#3399CC',
                                         }
                                     ),
-                                    stroke: new ol.style.Style.Stroke(
+                                    stroke: new ol.style.Stroke(
                                         {
                                             color: '#fff',
                                             width: 2,
@@ -82,6 +92,7 @@ positionFeature.setStyle(
                                 }
                             ),
                         }
+                    )
 );
 objetivoGeolocalizador.on('change:position', function()
 {
